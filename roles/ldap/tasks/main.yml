@@ -26,12 +26,3 @@
 - name: Print certificate verification result
   debug:
     var: verify_output.stdout_lines
-
-- name: Deploy the new SSL certificate
-  command: >
-    /opt/zimbra/bin/zmcertmgr deploycrt comm
-    {{ ldap_dir }}/commercial.crt
-    {{ ldap_dir }}/commercial_ca.crt
-
-- name: Restart Zimbra services
-  command: zmcontrol restart

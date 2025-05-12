@@ -1,5 +1,5 @@
 - name: Update SSL Certificates on GWEFA Servers
-  hosts: shared_gwefa
+  hosts: gwefa
   become: true
   vars:
     local_cert_dir: /path/to/local/awx/certs # Change to actual cert path on AWX
