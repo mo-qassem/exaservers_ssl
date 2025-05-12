@@ -1,0 +1,10 @@
+---
+- name: Update Zimbra-ldap SSL Certificates
+  hosts: ldap_servers
+  become: true
+  remote_user: exadmn
+  vars:
+    ldap_dir: /opt/zimbra/ssl/zimbra/commercial
+    local_dir: /root/exaservers
+  roles:
+    - ldap
