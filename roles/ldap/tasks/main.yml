@@ -38,11 +38,11 @@
 
 - name: Deploy the new SSL certificate
   become_user: zimbra
-  shell: >
+  command: >
     /opt/zimbra/bin/zmcertmgr deploycrt comm
     {{ ldap_dir }}/commercial.crt
     {{ ldap_dir }}/commercial_ca.crt
 
 - name: Restart Zimbra services
   become_user: zimbra
-  shell: zmcontrol restart
+  command: zmcontrol restart
