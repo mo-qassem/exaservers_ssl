@@ -24,6 +24,7 @@
     mode: "0640"
 
 - name: Verify the new SSL certificate
+  become_user: zimbra
   command: >
     /opt/zimbra/bin/zmcertmgr verifycrt comm
     {{ ldap_dir }}/commercial.key
