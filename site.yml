@@ -5,6 +5,6 @@
   remote_user: exadmn
   vars:
     ldap_dir: /opt/zimbra/ssl/zimbra/commercial
-    local_dir: /exa-ssl
+    local_dir: /exa-ssl/exaservers
   roles:
     - ldap

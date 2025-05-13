@@ -9,7 +9,7 @@
 
 - name: Upload commercial.key to Zimbra server
   copy:
-    src: "{{ local_dir }}exaservers/exaservers.key"
+    src: "{{ local_dir }}/exaservers.key"
     dest: "{{ ldap_dir }}/commercial.key"
     owner: zimbra
     group: zimbra
