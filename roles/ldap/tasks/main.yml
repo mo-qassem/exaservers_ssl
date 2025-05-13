@@ -43,6 +43,12 @@
     {{ ldap_dir }}/commercial.crt
     {{ ldap_dir }}/commercial_ca.crt
 
+- name: Enable SNMP and Stats services in Zimbra
+  become_user: zimbra
+  shell: |
+    /opt/zimbra/bin/zmprov ms `zmhostname` +zimbraServiceEnabled snmp
+    /opt/zimbra/bin/zmprov ms `zmhostname` +zimbraServiceEnabled stats
+
 - name: Restart Zimbra services
   become_user: zimbra
   command: /opt/zimbra/bin/zmcontrol restart
