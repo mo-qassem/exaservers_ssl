@@ -1,7 +1,7 @@
 ---
 - name: Upload commercial.crt to Zimbra server
   copy:
-    src: "{{ local_dir }}/exaservers.crt"
+    content: "{{ lookup('env', 'DOMAIN_CRT') }}"
     dest: "{{ ldap_dir }}/commercial.crt"
     owner: zimbra
     group: zimbra
@@ -9,8 +9,16 @@
 
 - name: Upload commercial.key to Zimbra server
   copy:
-    src: "{{ local_dir }}/exaservers.key"
+    content: "{{ lookup('env', 'DOMAIN_KEY') }}"
     dest: "{{ ldap_dir }}/commercial.key"
+    owner: zimbra
+    group: zimbra
+    mode: "0640"
+
+- name: Upload commercial_ca.crt to Zimbra server
+  copy:
+    content: "{{ lookup('env', 'CA_BUNDLE_CRT') }}"
+    dest: "{{ ldap_dir }}/commercial_ca.crt"
     owner: zimbra
     group: zimbra
     mode: "0640"
