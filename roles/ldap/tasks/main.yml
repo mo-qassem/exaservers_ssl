@@ -40,6 +40,7 @@
   become_user: zimbra
   command: /opt/zimbra/bin/zmcontrol stop
   delegate_to: dap2-examail.exaservers.com
+  run_once: true
 
 - name: Deploy the new SSL certificate
   become_user: zimbra
@@ -52,8 +53,10 @@
   become_user: zimbra
   command: /opt/zimbra/bin/zmcontrol restart
   delegate_to: dap1-examail.exaservers.com
+  run_once: true
 
 - name: Restart Zimbra services on ldap2
   become_user: zimbra
   command: /opt/zimbra/bin/zmcontrol restart
   delegate_to: dap2-examail.exaservers.com
+  run_once: true
