@@ -47,4 +47,13 @@
     /opt/zimbra/bin/zmcertmgr deploycrt comm
     {{ tmp_dir }}/commercial.crt
     {{ tmp_dir }}/commercial_ca.crt
-  notify: Restart Zimbra services
+
+- name: Restart Zimbra services on ldap1
+  become_user: zimbra
+  command: /opt/zimbra/bin/zmcontrol restart
+  delegate_to: dap1-examail.exaservers.com
+
+- name: Restart Zimbra services on ldap2
+  become_user: zimbra
+  command: /opt/zimbra/bin/zmcontrol restart
+  delegate_to: dap2-examail.exaservers.com
