@@ -36,11 +36,9 @@
   debug:
     var: verify_output.stdout_lines
 
-- name: Stop Zimbra-Ldap services on ldap2
+- name: Stop Zimbra-Ldap services
   become_user: zimbra
   command: /opt/zimbra/bin/zmcontrol stop
-  delegate_to: dap2-examail.exaservers.com
-  run_once: true
 
 - name: Deploy the new SSL certificate
   become_user: zimbra
