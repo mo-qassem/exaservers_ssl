@@ -2,7 +2,7 @@
 - name: Upload commercial.key to Zimbra server
   copy:
     content: "{{ lookup('env', 'DOMAIN_KEY') }}"
-    dest: "{{ tmp_dir  }}/commercial.key"
+    dest: "{{ ldap_dir }}/commercial.key"
     owner: zimbra
     group: zimbra
     mode: "0640"
@@ -27,7 +27,7 @@
   become_user: zimbra
   command: >
     /opt/zimbra/bin/zmcertmgr verifycrt comm
-    {{ tmp_dir  }}/commercial.key
+    {{ ldap_dir }}/commercial.key
     {{ tmp_dir }}/commercial.crt
     {{ tmp_dir }}/commercial_ca.crt
   register: verify_output
