@@ -1,0 +1,27 @@
+---
+- name: Upload domain.key
+  copy:
+    content: "{{ lookup('env', 'DOMAIN_KEY') }}"
+    dest: "{{ gwefa_key }}/exaservers.key"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart HTTPD
+
+- name: Upload domain.crt
+  copy:
+    content: "{{ lookup('env', 'DOMAIN_CRT') }}"
+    dest: "{{ gwefa_cert }}/exaservers.crt"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart HTTPD
+
+- name: Upload domain.crt
+  copy:
+    content: "{{ lookup('env', 'DOMAIN_CRT') }}\n{{ lookup('env', 'CA_BUNDLE_CRT') }}"
+    dest: "{{ gwefa_smtpd }}/exaservers.crt"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Postfix

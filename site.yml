@@ -2,9 +2,18 @@
 - name: Update Zimbra-ldap SSL Certificates
   hosts: ldap_servers
   become: true
-  remote_user: exadmn
   vars:
     ldap_dir: /opt/zimbra/ssl/zimbra/commercial
     tmp_dir: /opt/zimbra/ssl/zimbra/.tmp
   roles:
     - ldap
+
+- name: Update GWEFA-Shared Certificates
+  hosts: shared_gwefa
+  become: true
+  vars:
+    gwefa_cert: /etc/pki/tls/certs
+    gwefa_key: /etc/pki/tls/private
+    gwefa_smtpd: /etc/postfix/ssl
+  roles:
+    - gwefa

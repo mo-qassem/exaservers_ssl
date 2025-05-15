@@ -1,0 +1,4 @@
+---
+- name: Restart Zimbra services
+  become_user: zimbra
+  command: /opt/zimbra/bin/zmcontrol restart
