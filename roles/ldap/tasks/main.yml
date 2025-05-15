@@ -1,24 +1,8 @@
 ---
-- name: Upload commercial.crt to Zimbra server
-  copy:
-    content: "{{ lookup('env', 'DOMAIN_CRT') }}"
-    dest: "{{ ldap_dir }}/commercial.crt"
-    owner: zimbra
-    group: zimbra
-    mode: "0640"
-
 - name: Upload commercial.key to Zimbra server
   copy:
     content: "{{ lookup('env', 'DOMAIN_KEY') }}"
     dest: "{{ ldap_dir }}/commercial.key"
-    owner: zimbra
-    group: zimbra
-    mode: "0640"
-
-- name: Upload commercial_ca.crt to Zimbra server
-  copy:
-    content: "{{ lookup('env', 'CA_BUNDLE_CRT') }}"
-    dest: "{{ ldap_dir }}/commercial_ca.crt"
     owner: zimbra
     group: zimbra
     mode: "0640"
@@ -28,20 +12,25 @@
   command: >
     /opt/zimbra/bin/zmcertmgr verifycrt comm
     {{ ldap_dir }}/commercial.key
-    {{ ldap_dir }}/commercial.crt
-    {{ ldap_dir }}/commercial_ca.crt
+    {{ ldap_dir }}/"{{ lookup('env', 'DOMAIN_CRT') }}"
+    {{ ldap_dir }}/"{{ lookup('env', 'CA_BUNDLE_CRT') }}"
   register: verify_output
 
 - name: Print certificate verification result
   debug:
     var: verify_output.stdout_lines
 
+- name: Stop Zimbra-Ldap services on ldap2
+  become_user: zimbra
+  command: /opt/zimbra/bin/zmcontrol stop
+  delegate_to: dap2-examail.exaservers.com
+
 - name: Deploy the new SSL certificate
   become_user: zimbra
   command: >
     /opt/zimbra/bin/zmcertmgr deploycrt comm
-    {{ ldap_dir }}/commercial.crt
-    {{ ldap_dir }}/commercial_ca.crt
+    {{ ldap_dir }}/"{{ lookup('env', 'DOMAIN_CRT') }}"
+    {{ ldap_dir }}/"{{ lookup('env', 'CA_BUNDLE_CRT') }}"
 
 - name: Enable SNMP and Stats services in Zimbra
   become_user: zimbra
