@@ -1,5 +1,5 @@
 ---
-- name: Upload domain.key
+- name: Update exaservers domain key
   copy:
     content: "{{ lookup('env', 'DOMAIN_KEY') }}"
     dest: "{{ gwefa_key }}/exaservers.key"
@@ -8,7 +8,7 @@
     mode: "0644"
   notify: Restart HTTPD
 
-- name: Upload domain.crt
+- name: Update exaservers domain cert
   copy:
     content: "{{ lookup('env', 'DOMAIN_CRT') }}"
     dest: "{{ gwefa_cert }}/exaservers.crt"
@@ -17,10 +17,10 @@
     mode: "0644"
   notify: Restart HTTPD
 
-- name: Upload domain.crt
+- name: Update postfix smtpd pem
   copy:
     content: "{{ lookup('env', 'DOMAIN_CRT') }}\n{{ lookup('env', 'CA_BUNDLE_CRT') }}"
-    dest: "{{ gwefa_smtpd }}/exaservers.crt"
+    dest: "{{ gwefa_smtpd }}/smtpd.pem"
     owner: root
     group: root
     mode: "0644"
