@@ -1,15 +1,27 @@
 ---
-- name: Update GWEFA-Shared Certificates
-  hosts: shared_gwefa
+- name: Update cPanel-Shared Certificates
+  hosts: cpanel_shared
   become: true
   vars:
-    gwefa_cert: /etc/pki/tls/certs
-    gwefa_key: /etc/pki/tls/private
-    gwefa_smtpd: /etc/postfix/ssl
+    ssl_services:
+      - cpanel
+      - dovecot
+      - exim
+      - ftp
   roles:
-    - gwefa
+    - cpanel_shared
+# - name: Update GWEFA-Shared Certificates
+#   hosts: shared_gwefa
+#   become: true
+#   vars:
+#     gwefa_cert: /etc/pki/tls/certs
+#     gwefa_key: /etc/pki/tls/private
+#     gwefa_smtpd: /etc/postfix/ssl
+#   roles:
+#     - gwefa
+
 # - name: Update Zimbra-ldap SSL Certificates
-#   hosts: ldap_servers
+#   hosts: bronzmail_ldap
 #   become: true
 #   vars:
 #     ldap_dir: /opt/zimbra/ssl/zimbra/commercial
