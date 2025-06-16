@@ -4,9 +4,6 @@
   become: true
   vars:
     ssl_services:
-      - cpanel
-      - dovecot
-      - exim
       - ftp
   roles:
     - cpanel_shared
