@@ -1,6 +1,6 @@
 ---
 - name: Update cPanel-Shared Certificates
-  hosts: cpanel_shareds
+  hosts: cpanel_shared
   vars:
     ssl_services:
       - ftp
