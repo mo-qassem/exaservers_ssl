@@ -1,7 +1,7 @@
 ---
 - name: Install SSL certificate for cPanel-{{ item }} service
   command: >
-    whmapi1 install_service_ssl_certificate
+    /usr/sbin/whmapi1 install_service_ssl_certificate
     service={{ item }}
     crt='{{ lookup('env', 'DOMAIN_CRT') }}'
     key='{{ lookup('env', 'DOMAIN_KEY') }}'
