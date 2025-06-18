@@ -4,5 +4,8 @@
   become_user: root
   command: >
     /usr/sbin/whmapi1 install_service_ssl_certificate
-    service={{ item }} crt='{{ lookup('env', 'DOMAIN_CRT') }}' key='{{ lookup('env', 'DOMAIN_KEY') }}' cabundle='{{ lookup('env', 'CA_BUNDLE_CRT') }}'
+    service={{ item }}
+    crt='{{ lookup('env', 'DOMAIN_CRT') }}'
+    key='{{ lookup('env', 'DOMAIN_KEY') }}'
+    cabundle='{{ lookup('env', 'CA_BUNDLE_CRT') }}'
   loop: "{{ ssl_services }}"
