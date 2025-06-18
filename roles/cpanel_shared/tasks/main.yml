@@ -1,6 +1,7 @@
 ---
 - name: Install SSL certificate for cPanel-{{ item }} service
   become: true
+  become_user: root
   command: >
     /usr/sbin/whmapi1 install_service_ssl_certificate
     service={{ item }}
